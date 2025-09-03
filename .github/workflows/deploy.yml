@@ -14,9 +14,8 @@ jobs:
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: cluster0.7vys54o.mongodb.net
-      #&appName=Cluster0
-      MONGODB_USERNAME: FabianCC ###{{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASSWORD: vbNclhnMetl0YNMt ###{{ secrets.MONGODB_PASSWORD }}
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }} ##FabianCC 
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }} ##vbNclhnMetl0YNMt 
       PORT: 8080
     steps:
       - name: Get Code
