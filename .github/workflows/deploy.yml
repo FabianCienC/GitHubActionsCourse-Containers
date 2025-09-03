@@ -11,18 +11,32 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container: 
-      image: node:16
-      #env: 
+    # container: 
+      # image: node:16
+      # env: 
     env:
-      MONGODB_CONNECTION_PROTOCOL: mongodb #mongodb+srv
-      MONGODB_CLUSTER_ADDRESS: mongodb #cluster0.7vys54o.mongodb.net
-      MONGODB_USERNAME: root #{{ secrets.MONGODB_USERNAME }}  
-      MONGODB_PASSWORD: example #{{ secrets.MONGODB_PASSWORD }} 
+      ### If you connect to a real databse
+      # MONGODB_CONNECTION_PROTOCOL: mongodb+srv
+      # MONGODB_CLUSTER_ADDRESS: cluster0.7vys54o.mongodb.net
+      # MONGODB_USERNAME: {{ secrets.MONGODB_USERNAME }}  
+      # MONGODB_PASSWORD: {{ secrets.MONGODB_PASSWORD }}
+      ### If you connect to a contianer db while you are in a contianer like node:16
+      #MONGODB_CONNECTION_PROTOCOL: mongodb
+      #MONGODB_CLUSTER_ADDRESS: mongodb
+      #MONGODB_USERNAME: root
+      #MONGODB_PASSWORD: example
+      ### If you want to connect to a container db buy you are in a real machine not a container
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example 
       PORT: 8080
     services:
       mongodb:
         image: mongo
+        ### Only if you work in a real machine and mongo as a container
+        ports:
+          - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
